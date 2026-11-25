@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oracle — a specific compliment, and a small invented myth</title>
+<meta name="description" content="A compliment built around one real detail you supply, and a small invented myth built from what a photo actually shows. Offline, on device, no account.">
+<meta name="theme-color" content="#101418">
+<style>
+  :root{--bg:#f6f5f2;--panel:#fff;--ink:#14181d;--muted:#5d666f;--line:#d9d6cf;--accent:#7a3f6d}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+  main{max-width:780px;margin:0 auto;padding:48px 20px 64px}
+  h1{font-size:34px;line-height:1.15;letter-spacing:-.02em;margin:0 0 10px}
+  .lede{font-size:18px;color:var(--muted);margin:0 0 26px}
+  .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;padding:12px 20px;border-radius:9px}
+  .status{margin:26px 0;padding:14px 16px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:9px;background:var(--panel);font-size:14px}
+  .status b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+  h2{font-size:17px;margin:30px 0 8px}
+  ul{padding-left:20px}li{margin:4px 0}
+  code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:#eeede9;padding:1px 5px;border-radius:4px}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin-top:8px}
+  th,td{text-align:left;border-bottom:1px solid var(--line);padding:7px 8px;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+  a{color:var(--accent)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+  @media(max-width:700px){.two{grid-template-columns:1fr}}
+  .box{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px 14px;font-size:14px}
+  .box b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:4px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Oracle</h1>
+  <p class="lede">Two small things, both built only from what you actually give it: a compliment around one real
+  detail you noticed, and a myth invented from what a photograph actually shows.</p>
+
+  <a class="cta" href="play/index.html">Open Oracle</a>
+
+  <div class="status">
+    <b>Status</b>
+    Built and working offline: the compliment (detail required, carried verbatim, no flattery words), the kept list,
+    the photo reading (palette, brightness, contrast, which third the light comes from), the myth, and the export.
+    <br><b>Not built</b>: a packaged Windows EXE / Android APK release (see the README). Face detection only where the
+    browser provides <code>FaceDetector</code> — where it does not, the app says so rather than pretending it looked.
+  </div>
+
+  <div class="two">
+    <div class="box"><b>Compliment</b>
+      Give it one detail — <em>“you rewrote the whole rota so Ravi could sit his exam”</em> — and the compliment is built
+      around that sentence, word for word. No detail, no compliment.</div>
+    <div class="box"><b>Portrait oracle</b>
+      A photo goes in; the app reads colour, light and composition — never the person — and invents a small myth from those
+      numbers. It says it invented it, every time.</div>
+  </div>
+
+  <h2>What it does</h2>
+  <ul>
+    <li>Refuses to produce a compliment with no detail behind it, rather than dressing up a generic one.</li>
+    <li>Carries the detail <strong>verbatim</strong> and says nothing else about the person.</li>
+    <li>Reads a photo's palette, brightness, contrast and which third the light comes from — and shows you those numbers.</li>
+    <li>Writes a myth that quotes at least two measured values, so it cannot be a template that fits any picture.</li>
+    <li>Labels the myth invented wherever it appears, including in the export.</li>
+    <li>Keeps what you choose to keep, on this device, and exports it as Markdown.</li>
+  </ul>
+
+  <h2>What it will not do</h2>
+  <ul>
+    <li><strong>Flatter.</strong> No “amazing”, “wonderful”, “perfect” — the framing carries no praise adjectives at all, and a test checks the list.</li>
+    <li><strong>Say anything about a person from a photo.</strong> No identity, no age, no gender, no ethnicity, no health, no mood. A last check blocks a myth containing any of those words before it is shown.</li>
+    <li><strong>Keep a photo.</strong> It is drawn to a canvas, sampled, and the canvas is dropped. No data URL is ever written to storage.</li>
+    <li><strong>Invent a myth from a photo it could not read.</strong> If a face detector is present and finds no face, it refuses and says so, with the photo still on screen.</li>
+    <li><strong>Upload anything.</strong> No network at runtime; CSP <code>connect-src 'none'</code>.</li>
+  </ul>
+
+  <h2>When things go wrong</h2>
+  <table>
+    <tr><th>Case</th><th>What happens</th></tr>
+    <tr><td>Bad input</td><td>A missing detail asks for one instead of producing a generic compliment; a blank name is refused; a non-image file is refused by type.</td></tr>
+    <tr><td>No network</td><td>Nothing changes — generation and the photo reading are on the device.</td></tr>
+    <tr><td>Storage full or unavailable</td><td>The compliment or myth is still generated and shown; keeping it fails with a notice saying it was not kept.</td></tr>
+    <tr><td>Corrupt saved state</td><td>An unreadable kept list is reported and offered for export, and is never replaced by an empty list without you saying so.</td></tr>
+  </table>
+
+  <h2>How to run it</h2>
+  <ul>
+    <li><strong>Here</strong>: <a href="play/index.html">play/index.html</a>, or install it from your browser's menu.</li>
+    <li><strong>Offline file</strong>: open <code>docs/play/index.html</code> straight from disk.</li>
+    <li><strong>Tests</strong>: <code>node tests/self-tests.js</code> — the Compliment spec's countable “done means” is asserted there.</li>
+  </ul>
+
+  <footer>
+    PolyForm Noncommercial 1.0.0 · (c) 2026 Dr Sohil Momin ·
+    <a href="https://github.com/drsamonline/app-oracle">source</a>
+  </footer>
+</main>
+</body>
+</html>
