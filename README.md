@@ -14,7 +14,8 @@ real detail you noticed, and a **myth** invented from what a photograph actually
 | | |
 |---|---|
 | **Built** | Compliment from one supplied detail, carried verbatim, with no praise adjectives; refusal when the detail is missing; a kept list on the device with Markdown export; photo reading (palette, brightness, contrast, tone, which third the light comes from); an invented myth quoting at least two measured values; a presence-only face gate; a guard that blocks any myth containing a claim about a person; honest handling of an unreadable kept list. |
-| **Not built** | A packaged Windows EXE / Android APK release (`app-builder` is not reachable here). Face detection in browsers that do not ship `FaceDetector` — Firefox and Safari among them; there the app says so instead of pretending it looked. |
+| **Release** | Windows EXE, Android APK and Linux binary, built from this source by `app-builder` in CI, attached to the rolling release: [app-latest](https://github.com/drsamonline/app-oracle/releases/tag/app-latest) |
+| **Not built** | Face detection in browsers that do not ship `FaceDetector` — Firefox and Safari among them; there the app says so instead of pretending it looked. |
 | **Untested** | The canvas path with a real decoded photo (the tests feed a stubbed 2D context, because jsdom has no canvas), the service worker and install prompt, and `FaceDetector` on a real device — the tests drive a fake detector, so the real API's behaviour on your browser is unverified. |
 
 ## The Compliment spec's "done means", counted
@@ -75,10 +76,6 @@ replacing a corrupt kept list with an empty one (2) each turned the suite red; r
   yields the same myth, which is what makes it testable rather than charming.
 
 ## What is not built, and why
-
-**The packaged release.** The definition of done asks for a release with the EXE and APK that
-`app-builder` produces from the same source. `app-builder` was not reachable from the environment
-this was built in, so no release exists and none is claimed.
 
 **Face detection everywhere.** `FaceDetector` is a Chromium API. A shipped model would be the
 honest way to cover other browsers; it is not in this v1, and the app says so at the point where
